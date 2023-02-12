@@ -31,8 +31,6 @@ services:
     image: brean/mobipick_labs:noetic
     working_dir: /root/catkin_ws/
     entrypoint: /entrypoint.sh
-    depends_on: 
-      - mobipick
     environment: 
       - DISPLAY # for Gazebo GUI
       - "ROS_DISTRO=noetic"
