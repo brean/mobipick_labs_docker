@@ -1,0 +1,51 @@
+version: '3'
+
+services:
+  mobipick:
+    hostname: mobipick
+    # gazebo server
+    image: brean/mobipick_labs:noetic
+    build:
+      context: ./
+      dockerfile: ./docker/mobipick_labs/Dockerfile
+      args:
+        ROS_DISTRO: noetic
+    working_dir: /root/catkin_ws/
+    entrypoint: /entrypoint.sh
+    environment: 
+      - DISPLAY # for Gazebo GUI
+      - "ROS_DISTRO=noetic"
+      - "GAZEBO_MASTER_URI=http://mobipick:12345"
+      - NVIDIA_VISIBLE_DEVICES=all # for docker-nvidia2
+      - NVIDIA_DRIVER_CAPABILITIES=all # for docker-nvidia2
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:ro  # for Gazebo GUI
+    expose:
+      - 11311 # roscore
+      - 12345 # gzserver
+    privileged: true  # for Gazebo GUI
+
+  mobipick_cmd:
+    # gazebo server
+    image: brean/mobipick_labs:noetic
+    working_dir: /root/catkin_ws/
+    entrypoint: /entrypoint.sh
+    depends_on: 
+      - mobipick
+    environment: 
+      - DISPLAY # for Gazebo GUI
+      - "ROS_DISTRO=noetic"
+      - "GAZEBO_MASTER_URI=http://mobipick:12345"
+      - "ROS_MASTER_URI=http://mobipick:11311"
+      - NVIDIA_VISIBLE_DEVICES=all # for docker-nvidia2
+      - NVIDIA_DRIVER_CAPABILITIES=all # for docker-nvidia2
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:ro  # for gazebo gui
+    privileged: true  # for Gazebo GUI
+    command: ['gzclient', '--verbose']
+
+
+networks:
+  default:
+    external:
+      name: mobipick
