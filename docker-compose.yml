@@ -24,6 +24,7 @@ services:
       - 11311 # roscore
       - 12345 # gzserver
     privileged: true  # for Gazebo GUI
+    command: ["roslaunch", "tables_demo_bringup", "demo_sim.launch"]
 
   mobipick_cmd:
     # gazebo server
@@ -42,7 +43,6 @@ services:
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:ro  # for gazebo gui
     privileged: true  # for Gazebo GUI
-    command: ['gzclient', '--verbose']
 
 
 networks:
