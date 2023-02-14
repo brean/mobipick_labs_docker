@@ -18,8 +18,12 @@ services:
       - "GAZEBO_MASTER_URI=http://mobipick:12345"
       - NVIDIA_VISIBLE_DEVICES=all # for docker-nvidia2
       - NVIDIA_DRIVER_CAPABILITIES=all # for docker-nvidia2
+      - XDG_RUNTIME_DIR 
+      - __NV_PRIME_RENDER_OFFLOAD
+      - __GLX_VENDOR_LIBRARY_NAME
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:ro  # for Gazebo GUI
+      - /run/user:/run/user:ro  # for Gazebo GUI
     expose:
       - 11311 # roscore
       - 12345 # gzserver
@@ -38,8 +42,12 @@ services:
       - "ROS_MASTER_URI=http://mobipick:11311"
       - NVIDIA_VISIBLE_DEVICES=all # for docker-nvidia2
       - NVIDIA_DRIVER_CAPABILITIES=all # for docker-nvidia2
+      - XDG_RUNTIME_DIR 
+      - __NV_PRIME_RENDER_OFFLOAD
+      - __GLX_VENDOR_LIBRARY_NAME
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:ro  # for gazebo gui
+      - /run/user:/run/user:ro  # for Gazebo GUI
     privileged: true  # for Gazebo GUI
 
 
