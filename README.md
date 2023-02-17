@@ -5,9 +5,11 @@ Docker (compose) environment for the DFKI MobiPick lab (https://github.com/DFKI-
 Install docker (or mobi) and docker-compose, install [nvidia-docker2](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/nvidia-docker.html) if you have an nvidia graphics card.
 
 # Usage
-Just run `mobipick.bash` it will download all required container and start the mobipick-gazebo environment for the tables demo (see `command:` in `docker-compose.yml`).
+If you just want to run the simulation withou planning and without rviz `mobipick.bash`. It will download all required container and start the mobipick-gazebo environment for the tables demo (see `command:` in `docker-compose.yml`).
 
 To run custom ROS commands just prefix them with `./cmd.bash`. This starts a new docker container with your command connected to the ROScore of the mobipick-container instance.
+
+Take a look at the `terminator.conf` file if you are interested how it all works together. If you have a slow PC you might also want to increase the values of `sleep` times to give Gazebo some more time to startup the simulation before planning.
 
 ## Example Run
 ### Option 1: run everything at once in terminator
