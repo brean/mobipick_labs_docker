@@ -14,7 +14,7 @@ RUN apt-get update -qq \
 # TODO: maybe not the best idea to run the default install-deps scripts,
 # it might already include some stuff already installed in the mobipick-image?!
 RUN cd ${CATKIN_WS_SRC} \
-  && git clone https://github.com/brean/mobipick_labs.git \
+  && git clone https://github.com/dfki-ni/mobipick_labs.git \
   && . ${CATKIN_WS}/devel/setup.sh \
   && cd mobipick_labs \
   && ./install-deps.sh \
