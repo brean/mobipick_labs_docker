@@ -763,7 +763,6 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN mkdir -p ${CATKIN_WS_SRC} \
   && cd ${CATKIN_WS_SRC} \
-  && git clone https://github.com/uos/rospy_message_converter.git \
   && git clone -b ${ROS_DISTRO}-hook https://github.com/brean/mir_robot.git
 
 RUN . /opt/ros/${ROS_DISTRO}/setup.sh \
